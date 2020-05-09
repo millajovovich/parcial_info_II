@@ -4,8 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        bodega.cpp \
         main.cpp \
         sistema.cpp
 
 HEADERS += \
+    bodega.h \
     sistema.h

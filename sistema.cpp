@@ -3,19 +3,29 @@
 sistema::sistema()
 {
     cout<<"       ----   BIENVENIDO AL CINEMA BALBIN ---"
-          "  Indique el tipo de sesion:"
-          " - Administrador (a)       "
-          " - Usuario (u) "
-          " => ";
+          "\n  Indique el tipo de sesion:"
+          "\n - Administrador (a)       "
+          "\n - Usuario (u) "
+          "\n => ";
 }
 //                                         -- REGISTRAR USUARIOS
 void sistema::registrar_usuario()
 {
+    bool ver = true;
     string usuario, clave;
-    cout<<"\nIngerese por favor el nombre usuario: ";   cin >> usuario;
-    cout<<"\nIngerese por favor la contraseña: ";   cin >> clave;
-    datos[usuario]=clave;           //cuadrar por si colocan valores invalidos
+    while( ver!=false ){                                //ciclo verificacion repetido
+        ver=false;
+       cout << "\nIngerese el nombre usuario sin caracteres especiales (ej: tomyVelez78): ";   cin >> usuario;
+       cout << "Ingerese por favor la clave: ";   cin >> clave;
 
+       for ( auto &it : datos){                //for para verificar si usuario repetido
+           if ( it.first == usuario ){
+                cout << "\nEl usuario ingresado ya esta en uso, intentelo nuevamente..\n";
+                ver = true;
+           }
+       }
+    }
+    datos[usuario]=clave;
 }
 
 //                                         -- CONFIRMAR USUARIOS
@@ -23,7 +33,7 @@ bool sistema::confirmar_usuario()
 {
     string usuario, clave;
     cout<<"\nIngerese por favor el nombre usuario: ";   cin >> usuario;
-    cout<<"\nIngerese por favor la contraseña: ";   cin >> clave;
+    cout<<"\nIngerese por favor la clave: ";   cin >> clave;
 
     for (auto &it: datos)
         if ( it.first==usuario && it.first==clave)  return true;
@@ -37,25 +47,30 @@ void sistema::cargar_usuarios()
     ifstream usuarios;
     usuarios.open("datos.txt");
     string linea, usuario="", contra="";
+    bool ver=false;                                     //bool para separar usuario de clave
 
-    for(int t=0 ; !usuarios.eof() ; t++ ){              //for para recorrer cada renglon del archivo
+    while( !usuarios.eof()) {              //for para recorrer cada renglon del archivo
         getline(usuarios, linea);
 
         for (int g=0 ; linea[g]!='\0' ; g++){
-            if (  isalpha(linea[g])  )                 //if para poner todas las letras en usuario
-                usuario += linea[g];
+            if ( linea[g]==','){                //if cambiar a clave
+                g++;
+                ver=true;}
 
-            else if ( isalnum(linea[g]))                //if para poner todos los numeros en contra
+            if (  ver==false  ){                 //if para poner todas las letras en usuario
+                usuario += linea[g];}
+            else
                 contra += linea[g];
         }
+    cout<<usuario<<"-"<<contra<<endl;
         if ( usuario != "" )                //para asegurar no cojer un espacio vacio como usuario
             datos[usuario]=contra;
-        usuario="";     contra="";          //vaciado de string para recibir otros datos
+        usuario="";     contra="";    ver=false;      //vaciado de string para recibir otros datos
     }
     usuarios.close();
 }
 
-
+//                                         -- CARGAR USUARIOS
 void sistema::guardar_usuarios()
 {
     ofstream salida;
@@ -63,4 +78,5 @@ void sistema::guardar_usuarios()
 
     for (auto &it : datos)
         salida<<it.first<<','<<it.second<<endl;
+    salida.close();
 }

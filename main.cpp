@@ -1,10 +1,13 @@
 #include <iostream>
+#include "sistema.h"
 
 
 using namespace std;
 
-int main()
+int main(void)
 {
-    cout << "Hello World!" << endl;
-    return 0;
+    sistema servidor;
+    servidor.cargar_usuarios();
+    servidor.registrar_usuario();
+    servidor.guardar_usuarios();
 }

@@ -13,11 +13,11 @@ class sistema
 public:
     sistema();
 
-private:
     void registrar_usuario();
     bool confirmar_usuario();
     void cargar_usuarios();
     void guardar_usuarios();
+
 };
 
 #endif // SISTEMA_H
