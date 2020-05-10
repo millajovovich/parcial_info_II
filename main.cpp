@@ -1,13 +1,12 @@
 #include <iostream>
 #include "sistema.h"
-
-
-using namespace std;
+#include "bodega.h"
 
 int main(void)
 {
-    sistema servidor;
-    servidor.cargar_usuarios();
-    servidor.registrar_usuario();
-    servidor.guardar_usuarios();
+    bodega almacen;
+    almacen.cargar_productos();
+    //almacen.cargar_combos();
+    //almacen.mostrar_combos();
+    almacen.surtir_producto();
 }
