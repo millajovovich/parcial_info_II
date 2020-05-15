@@ -3,20 +3,22 @@
 sistema::sistema()                      //me falta el de la silla para llevar el recado
 {   }
 
-void sistema::tomar_lugar(string producto)  // se usa un mapa ya que no requiere un especifico numero de reserva
+void sistema::mostrar_pedidos()
 {
+    for ( auto &it : asiento ){
+        cout << it.first << "=> ";
+        for (auto &it2 : it.second)
+            cout << it2 << "  ";
+    }
+}
+
+void sistema::tomar_lugar(string producto)  // se usa un mapa ya que no requiere un especifico numero de reserva
+{                                           //recibe string del producto que compro
     string lugar, nombre;
     cout << "\n Ingrese la sala y lugar de ubucacion (ej: 5-15f ), separadamente a nombre de quien.\n =>";
     cin >> lugar >> nombre;
     asiento[lugar].push_back(producto);
     asiento[lugar].push_back(nombre);
-
-    for ( auto &it : asiento ){
-        cout << it.first << "- ";
-        for (auto &it2 : it.second)
-            cout << it2 << "- ";
-    }
-    cout << endl;
 
 }
 
@@ -46,7 +48,7 @@ bool sistema::confirmar_usuario(int tipo)                       //tipo para defi
     string usuario, clave;
     if (tipo ==0){                                                              //ingreso para usuario
         cout<<"\nIngerese por favor el nombre usuario: ";   cin >> usuario;
-        cout<<"\nIngerese por favor la clave: ";   cin >> clave;
+        cout<<"\nIngrese por favor la clave: ";   cin >> clave;
 
         for (auto &it: datos)                                                   //para recorrer el mapa de usuarios
             if ( (it.first==usuario && it.second==clave) && it.first!="ADMIN")  return true;
@@ -81,7 +83,6 @@ void sistema::cargar_usuarios()
             else
                 contra += linea[g];
         }
-    cout<<usuario<<"-"<<contra<<endl;
         if ( usuario != "" )                //para asegurar no cojer un espacio vacio como usuario
             datos[usuario]=contra;
         usuario="";     contra="";    ver=false;      //vaciado de string para recibir otros datos
@@ -117,8 +118,8 @@ void sistema::pago_compra( int costo)
             {
                 cout<<valores[g]<<": "<<int(residuo/valores[g])<<endl;
                 if (residuo >= valores[g]){
-                    residuo = residuo-valores[g];
-                }
+                    residuo -= valores[g]*int(residuo/valores[g]);          // le resto el valor del billete por la cantidad
+                }                                                           // de los billetes de ese valor
             }
             cout << "residuo : "<< residuo << endl;
             break;

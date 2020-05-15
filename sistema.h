@@ -12,7 +12,8 @@ class sistema
 
 public:
     sistema();
-    void tomar_lugar(string);                                 //funcion para guardar temporalmente a donde se lleva el pedido
+    void mostrar_pedidos();                             // para mostrar los asientos la informacion del pedido
+    void tomar_lugar(string);                           //funcion para guardar temporalmente a donde se lleva el pedido
     void registrar_usuario();                           // realiza el registro de usuarios por medio del ADMIN
     bool confirmar_usuario(int tipo);                   // para verificar si se encuenta en los datos
     void cargar_usuarios();                             // para cargar los datos de ususarios y admin

@@ -41,6 +41,7 @@ void bodega::cargar_productos()
         cant="";
         precio="";
     }
+    num_product--;                                              // suma un producto de mas por lo tanto se borra
 }
 
 //                                         -- PRODUCTO VENDIDO
@@ -81,11 +82,6 @@ int bodega::venta_item(string producto, int tipo)
             }
         }
     }
-    factura.close();
-    for ( int g=0; items[g][0]!="" ; g++){
-        for( int t=0; t<3 ; t++)    cout<<   items[g][t]<<" ";
-        cout<<endl;
-    }
     return costo;
 }
 
@@ -94,6 +90,7 @@ void bodega::add_producto()
 {
     bool ver=true;
     string producto, cant, precio;
+    cout << " numero productos " << num_product<<endl;
     while( ver!=false ){                                //ciclo verificacion repetido
         ver=false;
         cout<<"\nIngrese el producto a registrar, cantidad y el valor por unidad separadamente\n";
@@ -111,7 +108,7 @@ void bodega::add_producto()
     items[num_product][0]=producto;
     items[num_product][1]=cant;
     items[num_product][2]=precio;
-    num_product++;
+    num_product++;                                              // se suma el producto añadido
 
     for ( int g=0; g<num_product ; g++){
         for( int t=0; t<3 ; t++)    cout<<   items[g][t]<<" ";
@@ -127,6 +124,11 @@ void bodega::cargar_combos()
     ifstream comb;
     comb.open("combos.txt");
     int cantidad=0, dato=0;
+
+    for ( int g=0 ; combos[g][0]!="" ; g++ ){                   // for para limpiar la matrix en casi de añadir nuevo combo
+        for ( int t=0 ; combos[g][t]!="" ; t++ )
+            combos[g][t]="";
+    }
 
     for( int g=0 ;  !comb.eof() ; g++){             //for para recorrer archivo
         getline(comb, linea);
@@ -228,8 +230,13 @@ void bodega::add_combo(){
     string comb;
     ofstream combo;
     combo.open("combos.txt", fstream::app);
-    cout << "\nIngrese el nuevo combo de la sig manera (nombreCombo,valor,producto,cantidad,..)"
-            "ejemplo: combo1,50000,hamburguesa,1,crispetas,1,gaseosa_9oz,1 \n => ";     cin >>comb;
+
+    cout << "\n Productos para generar combos: \n";
+    for ( int h=0 ; items[h][0]!="" ; h++ )                         //for para mostrar los productos y formar combo
+        cout << items[h][0] << endl;
+
+    cout << "\nIngrese el nuevo combo de la sig manera (nombreCombo,valor combo,producto,cantidad producto,..)"
+            "\nEjemplo: combo1,50000,hamburguesa,1,crispetas,1,gaseosa_9oz,1 \n => ";     cin >>comb;
 
     combo<<comb<<endl;                                        //añado el nuevo combo al archivo
     combo.close();

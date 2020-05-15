@@ -15,10 +15,10 @@ class bodega
 public:
     void cargar_combos();
     void cargar_productos();
-    int venta_item(string, int);                // recive un int por si el usuario compra un combo o un producto del inv.
+    int venta_item(string, int);                // recive un int para definir si compra un combo o un producto del inv.
     void surtir_producto();                     // funcion para surtir algun producto del inventario
     void add_producto();                        // para añadir nuevo producto
-    void mostrar_combos();
+    void mostrar_combos();                      // muestra los combos y los productos a la venta
     void guardar_productos();                   //suardar productos en archivo
     void add_combo();
 
