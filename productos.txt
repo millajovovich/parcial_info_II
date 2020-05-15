@@ -1,0 +1,7 @@
+hotDog,29;15000
+gaseosa_9oz,10;4000
+crispetas,6;12000
+hamburguesa,3;16000
+nachotes,19;16000
+jumbo,12;4300
+gaseosa_peq,20;5000

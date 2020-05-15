@@ -1,0 +1,5 @@
+combo1,50000,hamburguesa,2,crispetas,1,gaseosa_9oz,2
+combo2,40000,hamburguesa,1,crispetas,1,gaseosa_9oz,2
+combo3,35000,hamburguesa,1,perro,1,gaseosa_9oz,2
+combo4,36800,crispetas,1,hotDog,1,gaseosa_9oz,2
+combo5,46000,crispetas,1,jumbo,1,gaseosa_9oz,2

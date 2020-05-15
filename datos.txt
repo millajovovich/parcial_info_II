@@ -1,0 +1,4 @@
+ADMIN,123456789
+JoseManuel,456123
+camila12,741852
+josito,456789
